@@ -61,11 +61,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _EnvBlend: 0.542
-    - _EnvIntensity: 1
+    - _EnvBlend: 0.335
+    - _EnvIntensity: 1.274
     - _Exposure: 1
     - _FresnelBoost: 1
-    - _FresnelPow: 5
+    - _FresnelPow: 0.1
     - _Rotation: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}

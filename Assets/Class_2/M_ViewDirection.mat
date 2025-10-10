@@ -30,7 +30,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _RimPower: 4.06
+    - _RimPower: 3.12
     - _RimStrength: 1
     - _UVSET: 0
     m_Colors:

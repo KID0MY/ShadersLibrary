@@ -25,6 +25,7 @@ Shader "LucasShaders/ToonShaderWithRim"
             {
                 float4 positionOS : POSITION;
                 float3 normalOS : NORMAL;
+                float4 tangentOS : TANGENT;
             };
 
             struct Varyings
@@ -48,7 +49,8 @@ Shader "LucasShaders/ToonShaderWithRim"
                 Varyings OUT;
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.normalWS = normalize(TransformObjectToWorldNormal(IN.normalOS));
-                OUT.viewDirWS = normalize(GetWorldSpaceViewDir(IN.positionOS.xyz));
+                float3 worldPosWS = TransformObjectToWorld(IN.positionOS.xyz);
+                OUT.viewDirWS = normalize(GetWorldSpaceViewDir(IN.positionOS.xyz)-worldPosWS);
                 return OUT;
             }
 
@@ -62,9 +64,11 @@ Shader "LucasShaders/ToonShaderWithRim"
                 half rampValue = SAMPLE_TEXTURE2D(_RampTex, sampler_RampTex, float2(NdotL, 0)).r;
                 half3 finalColor = _BaseColor.rgb * lightColor * rampValue;
 
-                half rimDot = 1.0 - saturate(dot(IN.viewDirWS, IN.normalWS));
-                half rimFactor = pow(rimDot, _RimPower);
-                finalColor += _RimColor.rgb * rimFactor;
+                half3 normalWS = normalize(IN.normalWS);
+                half3 viewDirWS = normalize(IN.viewDirWS);
+                half rimFactor = 1.0 - saturate(dot(normalWS, viewDirWS));
+                half rimLighting = pow(rimFactor, _RimPower);
+                finalColor = finalColor + _RimColor.rgb * rimLighting;
 
                 return half4(finalColor, _BaseColor.a);
             }
