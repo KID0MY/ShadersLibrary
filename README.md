@@ -4,3 +4,6 @@ This is a personal project to help my fellow game dev classmates with shaders. I
 
 GoogleDocs Link: https://docs.google.com/document/d/1VGehYEM3OEL3SLOvT8wKgywK4R-qpuai_G8_9p4jKZc/edit?usp=sharing
 
+# Update
+
+I have now added the new shaders learned in class. I will be later on writing what each shader does in the doc
